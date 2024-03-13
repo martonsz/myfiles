@@ -1,0 +1,9 @@
+imap kj <Esc>
+set timeoutlen=500
+
+set clipboard+=unnamed
+
+Plug 'tpope/vim-surround'
+Plug 'preservim/nerdtree'
+
+nnoremap <c-w>= :action MaximizeEditorInSplit<CR>

@@ -1,0 +1,21 @@
+#!/bin/bash
+set -e
+set -o pipefail
+
+sshDir="$HOME/.ssh"
+date > "$sshDir/test.txt"
+
+{{ $bitwardenFields := bitwardenFields "item" "5fdca0e5-646a-4c58-b61c-b13100a4e8e6" }}
+{{ range $key, $value := $bitwardenFields }}
+echo "{{ $value.value }}" | base64 -d > "$sshDir/{{ $key }}"
+chmod 600 "$sshDir/{{ $key }}"
+{{ end }}
+
+
+{{ if .work1 }}
+{{ $bitwardenFields := bitwardenFields "item" "b99f8d8d-d022-47a2-ad4f-b13100d3509e" }}
+{{ range $key, $value := $bitwardenFields }}
+echo "{{ $value.value }}" |  base64 -d | gunzip > "$sshDir/{{ $key }}"
+chmod 600 "$sshDir/{{ $key }}"
+{{ end }}
+{{ end }}

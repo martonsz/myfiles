@@ -1,0 +1,46 @@
+#!/bin/bash
+set -e
+echo "~ Running $(basename $0)"
+
+# -------------------------------
+# Linux
+# -------------------------------
+{{ if eq .chezmoi.os "linux" }}
+sudo apt-get update
+sudo apt-get install -y \
+    bash \
+    bat \
+    ccze \
+    curl \
+    fd-find \
+    git \
+    gzip \
+    jq \
+    libfuse2 \
+    python3-venv \
+    ripgrep \
+    tar \
+    tmux \
+    unzip \
+    wget \
+    zsh
+
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+# -------------------------------
+# Linux WSL
+# -------------------------------
+
+{{   end }}
+{{ end }}
+
+{{ if eq .chezmoi.os "darwin" -}}
+# -------------------------------
+# macOS
+# -------------------------------
+brew install \
+    ccze \
+    fd \
+    jq \
+    ripgrep \
+    tmux
+{{ end }}

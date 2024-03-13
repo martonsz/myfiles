@@ -1,0 +1,14 @@
+{{- /* Checks if running interactively */ -}}
+{{- $interactive := stdinIsATTY -}}
+
+{{ $email := promptStringOnce . "email" "email" }}
+{{ $git_email := promptString "git_email" $email -}}
+{{ $git_name := promptString "git_name" "Marton Szucs" -}}
+
+{{- $work1 := promptBool "work1" false -}}
+
+[data]
+    email = {{ $email | quote }}
+    git_email = {{ $git_email | quote }}
+    git_name = {{ $git_name | quote }}
+    work1 = {{ $work1 }}

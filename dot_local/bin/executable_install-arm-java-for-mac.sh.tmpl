@@ -1,0 +1,17 @@
+#!/bin/bash
+{{ if eq .chezmoi.os "darwin" -}}
+# Downloads ARM64 and AMD64 version of Java for MacOS running on M1
+#
+# https://github.com/Jabba-Team/jabba/issues/14
+# URLs are fetched from this index.json https://github.com/Jabba-Team/jabba/blob/main/index.json
+
+[ -s "$HOME/.jabba/jabba.sh" ] && source "$HOME/.jabba/jabba.sh"
+
+jabba install 17-zulu-arm=tgz+https://api.foojay.io/disco/v3.0/ids/116a80beb8b3207aad5fa8d1e1af20c6/redirect
+jabba install 8-zulu-arm=tgz+https://api.foojay.io/disco/v3.0/ids/c3f7c076bf335d1061c74f7fab42bb89/redirect
+
+# Can't use the same version number when installing the same version but different architecture.
+# Jabba will only look at the version part. Not the whole name when switching between java versions. Bug?
+jabba install 1.17-zulu-amd=tgz+https://api.foojay.io/disco/v3.0/ids/e732e8c2fed7f12f460206a4298102d9/redirect
+jabba install 1.8-zulu-amd=tgz+https://api.foojay.io/disco/v3.0/ids/098fa753a35703dfe96f59e504d1b6af/redirect
+{{ end }}

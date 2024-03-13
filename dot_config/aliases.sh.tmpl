@@ -1,0 +1,68 @@
+#!/bin/bash
+
+if hash fdfind 2> /dev/null; then
+  alias fd=fdfind
+fi
+
+if hash batcat 2> /dev/null; then
+  alias bat=batcat
+fi
+
+if hash nvim 2> /dev/null; then
+    alias vi=nvim
+    alias vim=nvim
+fi
+
+alias ch="chezmoi"
+alias dockerarch='for i in `docker ps --format "{{`{{.Image}}`}}"` ; do docker image inspect $i --format "$i -> {{`{{.Architecture}}`}} : {{`{{.Os}}`}}" | grep --color=always "amd64\|$" ;done'
+alias fzfcd="cd \$(find * -type d | fzf)"
+alias fzfvi="vi \$(find * -type f | fzf)"
+alias ld=lazydocker
+
+{{ if eq .chezmoi.os "darwin" -}}
+alias removeQuarantine="sudo xattr -r -d com.apple.quarantine"
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+alias typora="open -a typora"
+{{ end }}
+
+jour() {
+    journalctl -f CONTAINER_NAME=$@ | ccze -A
+}
+
+listening() {
+    if [ $# -eq 0 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P
+    elif [ $# -eq 1 ]; then
+        sudo lsof -iTCP -sTCP:LISTEN -n -P | grep -i --color $1
+    else
+        echo "Usage: listening [pattern]"
+    fi
+}
+
+bwu() {
+  if [ -z "$BW_SESSION" ] || [ "$(bw status | jq -r '.status')" != "unlocked" ]; then
+    if ! BW_SESSION=$(bw unlock --raw); then
+        if ! BW_SESSION=$(bw login {{ .email }} --raw); then
+            echo "ERROR could not login"
+            exit 1
+        fi
+    fi
+    export BW_SESSION
+  fi
+}
+
+# Visual Studio Code
+if ! type coder >/dev/null 2>&1; then
+    coder() {
+        code $(readlink -f $@)
+    }
+fi
+
+# Youtube download
+alias yt-dl='docker run \
+                  --rm -i \
+                  -e PGID=$(id -g) \
+                  -e PUID=$(id -u) \
+                  -v "$(pwd)":/workdir:rw \
+                  mikenye/youtube-dl'
+
