@@ -51,6 +51,10 @@ bwu() {
   fi
 }
 
+function docker-tags() {
+    curl -s "https://hub.docker.com/v2/repositories/$1/tags?page_size=100" | jq -r '.results[] | "\(.images[].digest) \(.name)"' | sort -u | awk -F ' ' 'BEGIN {i="digest"; j="tags"} {if(i!=$1){if(i!="digest"){print i" : "j}; i=$1; j=$2} else {j=j" | "$2}} END{print i" : "j}'
+}
+
 # Visual Studio Code
 if ! type coder >/dev/null 2>&1; then
     coder() {
