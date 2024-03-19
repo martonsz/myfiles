@@ -1,30 +1,43 @@
 #!/bin/bash
-# Get public IP4 using online servies that responds with you public IP.
+# Get public IP4 using online services that responds with you public IP.
 # The service is selected by random every time the script is executed.
 
-# TODO
-# - Add test function that tests all the URLs.
-
-urls=(https://ipinfo.io
-https://www.jsonip.com
+urls=(
+https://ipinfo.io
 https://api.ipify.org
 https://ipv4.icanhazip.com
 https://ipecho.net/plain
 )
-function curlIP() {
-        IPADDR=$(curl --connect-timeout 8 "$1" 2>/dev/null | grep -oP "\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")
-        echo "$IPADDR"
+
+# Function to get IP
+getIP() {
+    for url in "${urls[@]}"; do
+        IPADDR=$(curl --connect-timeout 8 "$url" 2>/dev/null | grep -Eo "\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")
+        if [[ -n "$IPADDR" ]]; then
+            echo "$IPADDR"
+            return
+        fi
+    done
+    echo "Failed to retrieve IP address"
+    exit 1
 }
 
-readarray -t sorted < <(for a in "${urls[@]}";
-do
-        echo "$a";
-done | sort --random-sort)
+# Function to test all endpoints
+testEndpoints() {
+    for url in "${urls[@]}"; do
+        echo "Testing $url"
+        IPADDR=$(curl --connect-timeout 8 "$url" 2>/dev/null | grep -Eo "\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")
+        if [[ -n "$IPADDR" ]]; then
+            echo "Success: $IPADDR"
+        else
+            echo "Failed"
+        fi
+    done
+}
 
-for url in "${sorted[@]}"
-do
-        IPADDR=$(curlIP "$url")
-        [[ -n "$IPADDR" ]] && break
-done
-
-echo "$IPADDR"
+# Check for "test" argument
+if [[ $1 == "test" ]]; then
+    testEndpoints
+else
+    getIP
+fi
