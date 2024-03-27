@@ -9,10 +9,16 @@ https://ipv4.icanhazip.com
 https://ipecho.net/plain
 )
 
+{{ if eq .chezmoi.os "darwin" -}}
+regex='\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b'
+{{ else}}
+regex='[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'
+{{ end}}
+
 # Function to get IP
 getIP() {
     for url in "${urls[@]}"; do
-        IPADDR=$(curl --connect-timeout 8 "$url" 2>/dev/null | grep -Eo "\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")
+        IPADDR=$(curl --connect-timeout 8 "$url" 2>/dev/null | grep -Eo "$regex")
         if [[ -n "$IPADDR" ]]; then
             echo "$IPADDR"
             return
@@ -26,7 +32,7 @@ getIP() {
 testEndpoints() {
     for url in "${urls[@]}"; do
         echo "Testing $url"
-        IPADDR=$(curl --connect-timeout 8 "$url" 2>/dev/null | grep -Eo "\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b")
+        IPADDR=$(curl --connect-timeout 8 "$url" 2>/dev/null | grep -Eo "$regex")
         if [[ -n "$IPADDR" ]]; then
             echo "Success: $IPADDR"
         else
