@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+echo "~ Running $(basename $0)"
+
+{{- if eq .chezmoi.os "darwin" -}}
+brew install gh
+{{- else -}}
+apt install gh
+{{- end -}}
+
+gh extension install github/gh-copilot

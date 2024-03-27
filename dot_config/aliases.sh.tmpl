@@ -13,6 +13,12 @@ if hash nvim 2> /dev/null; then
     alias vim=nvim
 fi
 
+if hash gh 2> /dev/null; then
+    alias co='gh copilot'
+    alias cos='gh copilot suggest'
+    alias coe='gh copilot explain'
+fi
+
 alias ch="chezmoi"
 alias dockerarch='for i in `docker ps --format "{{`{{.Image}}`}}"` ; do docker image inspect $i --format "$i -> {{`{{.Architecture}}`}} : {{`{{.Os}}`}}" | grep --color=always "amd64\|$" ;done'
 alias fzfcd="cd \$(find * -type d | fzf)"
