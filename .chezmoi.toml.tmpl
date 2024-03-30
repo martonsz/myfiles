@@ -1,6 +1,3 @@
-{{- /* Checks if running interactively */ -}}
-{{- $interactive := stdinIsATTY -}}
-
 {{ $email := promptStringOnce . "email" "email" }}
 {{ $git_email := promptString "git_email" $email -}}
 {{ $git_name := promptString "git_name" "Marton Szucs" -}}
