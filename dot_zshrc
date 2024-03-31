@@ -19,8 +19,8 @@ setopt pushdignoredups
 
 unsetopt beep
 
-source .config/exports.sh
-source .config/zsh_completion.zsh
+source "$HOME/.config/exports.sh"
+source "$HOME/.config/zsh_completion.zsh"
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -v
@@ -46,4 +46,4 @@ plug "agkozak/zsh-z"
 
 [[ -f "$HOME/.asdf/asdf.sh" ]] && source "$HOME/.asdf/asdf.sh"
 
-source .config/aliases.sh
+source "$HOME/.config/aliases.sh"
