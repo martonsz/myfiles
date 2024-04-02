@@ -1,7 +1,15 @@
-#!/bin/bash -x
+#!/bin/bash
 set -e
 echo "~ Running $(basename $0)"
 
+rcloneConfigFile="${XDG_CONFIG_HOME:-$HOME/.conf}/rclone/rclone.conf"
+touch "${rcloneConfigFile}"
+echo "" > "${rcloneConfigFile}"
+ 
+onExit () {
+    rm -fv "${rcloneConfigFile}.b64"
+}
+trap onExit EXIT ERR
 
 if [ ! -d "$HOME/.asdf/installs/rclone" ]; then
     asdf plugin add rclone
@@ -10,4 +18,8 @@ if [ ! -d "$HOME/.asdf/installs/rclone" ]; then
     asdf global rclone latest
 fi
 
-echo "{{ (bitwardenFields "item" "2cc8271e-916b-44b3-80fa-b144010f1320").config.value }}" |  base64 -d | gunzip > "${XDG_CONFIG_HOME:-$HOME/.conf}/rclone/rclone.conf"
+{{ $bitwardenFields := bitwardenFields "item" "2cc8271e-916b-44b3-80fa-b144010f1320" }}
+{{ range $key, $value := $bitwardenFields }}
+echo "{{ $value.value }}" >> "${rcloneConfigFile}.b64"
+{{ end }}
+cat "${rcloneConfigFile}".b64 | base64 -d | gunzip > "${rcloneConfigFile}"
