@@ -1,0 +1,13 @@
+#!/bin/bash -x
+set -e
+echo "~ Running $(basename $0)"
+
+
+if [ ! -d "$HOME/.asdf/installs/rclone" ]; then
+    asdf plugin add rclone
+    asdf list all rclone
+    asdf install rclone latest
+    asdf global rclone latest
+fi
+
+echo "{{ (bitwardenFields "item" "2cc8271e-916b-44b3-80fa-b144010f1320").config.value }}" |  base64 -d | gunzip > "${XDG_CONFIG_HOME:-$HOME/.conf}/rclone/rclone.conf"
