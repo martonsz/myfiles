@@ -7,7 +7,7 @@ date > "$sshDir/test.txt"
 
 {{ $bitwardenFields := bitwardenFields "item" "5fdca0e5-646a-4c58-b61c-b13100a4e8e6" }}
 {{ range $key, $value := $bitwardenFields }}
-echo "{{ $value.value }}" | base64 -d > "$sshDir/{{ $key }}"
+echo "{{ $value.value }}" | base64 -d | gunzip > "$sshDir/{{ $key }}"
 chmod 600 "$sshDir/{{ $key }}"
 {{ end }}
 
