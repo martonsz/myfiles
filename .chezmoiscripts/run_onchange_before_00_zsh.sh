@@ -10,4 +10,4 @@ if ! hash zsh 2> /dev/null; then
 fi
 
 echo "Set zsh as default shell"
-sudo chsh -s $(which zsh) $(whoami)
+sudo chsh -s "$(which zsh)" "$(whoami)"
