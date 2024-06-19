@@ -2,7 +2,7 @@
 set -e
 echo "~ Running $(basename $0)"
 
-rcloneConfigFile="${XDG_CONFIG_HOME:-$HOME/.conf}/rclone/rclone.conf"
+rcloneConfigFile="${XDG_CONFIG_HOME:-$HOME/.config}/rclone/rclone.conf"
 mkdir -p "$(dirname "${rcloneConfigFile}")"
 touch "${rcloneConfigFile}"
 echo "" > "${rcloneConfigFile}"
