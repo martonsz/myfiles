@@ -3,6 +3,7 @@ set -e
 echo "~ Running $(basename $0)"
 
 rcloneConfigFile="${XDG_CONFIG_HOME:-$HOME/.conf}/rclone/rclone.conf"
+mkdir -p "$(dirname "${rcloneConfigFile}")"
 touch "${rcloneConfigFile}"
 echo "" > "${rcloneConfigFile}"
  
@@ -12,6 +13,8 @@ onExit () {
 trap onExit EXIT ERR
 
 if [ ! -d "$HOME/.asdf/installs/rclone" ]; then
+    # shellcheck disable=SC1091
+    source "$HOME/.asdf/asdf.sh"
     asdf plugin add rclone
     asdf list all rclone
     asdf install rclone latest
