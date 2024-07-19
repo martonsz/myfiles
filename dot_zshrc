@@ -60,3 +60,4 @@ if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
 fi
 
 source "$HOME/.config/aliases.sh"
+source "$HOME/.config/ssh-agent.sh"
