@@ -2,10 +2,10 @@
 set -e
 echo "~ Running $(basename $0)"
 
-curl -LO https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage
 {{- if eq .chezmoi.os "darwin" -}}
-alias sha256sum='shasum -a 256'
-{{ end }}
+brew install neovim
+{{ else }}
+curl -LO https://github.com/neovim/neovim/releases/download/v0.9.5/nvim.appimage
 if ! sha256sum nvim.appimage | grep -q "0c82e5702af7a11fbb916a11b4a82e98928abf8266c74b2030ea740340437bf9"; then
     echo "checksum failed"
     exit 1
@@ -15,3 +15,4 @@ mkdir -p /usr/local/bin
 sudo mv -v nvim.appimage /usr/local/bin/nvim
 sudo ln -fvs /usr/local/bin/nvim /usr/local/bin/vim
 sudo ln -fvs /usr/local/bin/nvim /usr/local/bin/vi
+{{ end }}

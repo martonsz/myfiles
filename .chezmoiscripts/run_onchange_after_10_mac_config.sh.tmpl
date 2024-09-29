@@ -1,0 +1,9 @@
+#!/bin/bash
+echo "~ Running $(basename $0)"
+
+{{- if eq .chezmoi.os "darwin" -}}
+# Disable popup showing accented characters when holding down a key
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+brew install font-hack-nerd-font
+{{ end }}
