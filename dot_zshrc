@@ -61,3 +61,10 @@ fi
 
 source "$HOME/.config/aliases.sh"
 source "$HOME/.config/ssh-agent.sh"
+
+[ -s "$HOME/.local/bin/jabba/jabba.sh" ] && source "$HOME/.local/bin/jabba/jabba.sh"
+
+if [[ -d /opt/homebrew/bin ]]; then
+  PATH=/opt/homebrew/bin:$PATH
+fi
+
