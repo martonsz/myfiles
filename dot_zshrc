@@ -68,5 +68,7 @@ if [[ -d /opt/homebrew/bin ]]; then
   PATH=/opt/homebrew/bin:$PATH
 fi
 
-eval "$(direnv hook zsh)"
+if hash direnv 2> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 
