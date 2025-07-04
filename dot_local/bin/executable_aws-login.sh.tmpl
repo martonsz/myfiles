@@ -1,9 +1,0 @@
-#!/bin/bash
-
-if [[ $1 = "-p" ]]; then
-    echo "Logging in to ecr-public - {{ (bitwardenFields "item" "991ca226-318a-48bb-b2d3-af2300e1a026").ecr_public.value }}"
-    aws ecr-public get-login-password --region us-east-1    | docker login --username AWS --password-stdin {{ (bitwardenFields "item" "991ca226-318a-48bb-b2d3-af2300e1a026").ecr_public.value }}
-else
-    echo "Logging in to {{ (bitwardenFields "item" "991ca226-318a-48bb-b2d3-af2300e1a026").ecr_private.value }}"
-    aws ecr        get-login-password --region eu-central-1 | docker login --username AWS --password-stdin {{ (bitwardenFields "item" "991ca226-318a-48bb-b2d3-af2300e1a026").ecr_private.value }}
-fi
