@@ -72,3 +72,7 @@ if hash direnv 2> /dev/null; then
   eval "$(direnv hook zsh)"
 fi
 
+if [[ -d "$HOME/.rd/bin" ]]; then
+  # Add Rancher Desktop to the PATH if it exists
+  export PATH="$HOME/.rd/bin:$PATH"
+fi
