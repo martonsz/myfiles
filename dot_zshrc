@@ -1,3 +1,4 @@
+# shellcheck disable=SC2148
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
@@ -7,7 +8,10 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+# shellcheck disable=SC2296
 if [[ -r "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  # shellcheck disable=SC1090
+  # shellcheck disable=SC2296
   source "${XDG_CACHE_HOME}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -25,8 +29,11 @@ setopt pushdignoredups
 
 unsetopt beep
 
+# shellcheck disable=SC1091
 source "$HOME/.config/exports.sh"
+# shellcheck disable=SC1091
 source "$HOME/.config/myvars.sh"
+# shellcheck disable=SC1091
 source "$HOME/.config/zsh_completion.zsh"
 
 # Use emacs keybindings even if our EDITOR is set to vi
@@ -35,10 +42,12 @@ bindkey '^R' history-incremental-search-backward
 
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
+# shellcheck disable=SC2034
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
 
 # Zap installer
+# shellcheck disable=SC1091
 [ -f "${XDG_DATA_HOME}/zap/zap.zsh" ] && source "${XDG_DATA_HOME}/zap/zap.zsh"
 plug "zsh-users/zsh-autosuggestions"
 plug "MohamedElashri/eza-zsh"
@@ -46,12 +55,15 @@ plug "zsh-users/zsh-syntax-highlighting"
 plug "romkatv/powerlevel10k"
 plug "agkozak/zsh-z"
 
+# shellcheck disable=SC1091
 [ -f "${XDG_DATA_HOME}/zap/plugins/powerlevel10k/powerlevel10k.zsh-theme" ] && source "${XDG_DATA_HOME}/zap/plugins/powerlevel10k/powerlevel10k.zsh-theme"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# shellcheck disable=SC1090
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
+  # shellcheck disable=SC1091
   source "$HOME/.asdf/asdf.sh"
   # append completions to fpath
   #fpath=(${ASDF_DIR}/completions $fpath)
@@ -59,9 +71,12 @@ if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
   #autoload -Uz compinit && compinit
 fi
 
+# shellcheck disable=SC1091
 source "$HOME/.config/aliases.sh"
+# shellcheck disable=SC1091
 source "$HOME/.config/ssh-agent.sh"
 
+# shellcheck disable=SC1091
 [ -s "$HOME/.local/bin/jabba/jabba.sh" ] && source "$HOME/.local/bin/jabba/jabba.sh"
 
 if [[ -d /opt/homebrew/bin ]]; then
