@@ -1,6 +1,9 @@
 fpath+="$HOME/.config/completion"
 autoload -Uz compinit
-compinit
+
+# Initialize completions and suppress errors for missing completion files
+# This prevents errors like "no such file or directory" for optional completions
+compinit -i
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
