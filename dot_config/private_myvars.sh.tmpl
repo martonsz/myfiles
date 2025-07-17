@@ -1,1 +1,1 @@
-export RCLONE_CONFIG_PASS="{{ (bitwarden "item" "2cc8271e-916b-44b3-80fa-b144010f1320").login.password }}"
+export RCLONE_CONFIG_PASS="{{ joinPath .chezmoi.sourceDir ".secrets/.rclone-password.age" | include | decrypt | trim}}"

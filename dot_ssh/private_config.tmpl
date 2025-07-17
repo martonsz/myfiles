@@ -1,7 +1,4 @@
 Host *
   AddKeysToAgent yes
 
-Include config_private
-{{- if .work1 }}
-Include config_work1
-{{- end }}
+{{ joinPath .chezmoi.sourceDir ".secrets/.ssh_config.age" | include | decrypt }}

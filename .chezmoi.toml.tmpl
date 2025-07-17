@@ -1,11 +1,8 @@
-{{ $email := promptStringOnce . "email" "email" }}
-{{ $git_email := promptString "git_email" $email -}}
-{{ $git_name := promptString "git_name" "Marton Szucs" -}}
+encryption = "age"
 
-{{- $work1 := promptBool "work1" false -}}
+[age]
+    identity = "~/.age-chezmoi.txt"
+    recipient = "age1esy8xrcey8fk9n2qam7wz332p3c3wt4haqsl4gaz6vx9vndtjd7qh8tj8n"
 
-[data]
-    email = {{ $email | quote }}
-    git_email = {{ $git_email | quote }}
-    git_name = {{ $git_name | quote }}
-    work1 = {{ $work1 }}
+#[hooks.read-source-state.pre]
+#    command = ".local/share/chezmoi/.setup-age-encryption.sh"

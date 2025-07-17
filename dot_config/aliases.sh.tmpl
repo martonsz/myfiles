@@ -48,7 +48,7 @@ listening() {
 bwu() {
   if [ -z "$BW_SESSION" ] || [ "$(bw status | jq -r '.status')" != "unlocked" ]; then
     if ! BW_SESSION=$(bw unlock --raw); then
-        if ! BW_SESSION=$(bw login {{ .email }} --raw); then
+        if ! BW_SESSION=$(bw login {{ joinPath .chezmoi.sourceDir ".secrets/.email.age" | include | decrypt | trim }} --raw); then
             echo "ERROR could not login"
             exit 1
         fi

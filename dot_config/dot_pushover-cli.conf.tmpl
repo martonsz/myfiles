@@ -1,5 +1,4 @@
-user={{ (bitwardenFields "item" "42fcd723-7291-4f12-b8a6-acdc011b7eb3").user_key.value }}
-token={{ (bitwardenFields "item" "42fcd723-7291-4f12-b8a6-acdc011b7eb3").secret_cli.value }}
+{{ joinPath .chezmoi.sourceDir ".secrets/.pushover_user_token.age" | include | decrypt }}
 priority=normal
 verbose=0
 quiet=0

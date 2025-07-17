@@ -3,7 +3,9 @@ set -e
 {{ if eq .chezmoi.os "darwin" -}}
 echo "~ Running $(basename $0)"
 
-defaults write com.apple.dock autohide-delay -float 0; defaults write com.apple.dock autohide-time-modifier -int 0;killall Dock
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -int 0
+killall Dock
 
 # Revert
 #defaults write com.apple.dock autohide-delay -float 0.5; defaults write com.apple.dock autohide-time-modifier -int 0.5 ;killall Dock
