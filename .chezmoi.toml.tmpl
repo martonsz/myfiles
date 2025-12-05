@@ -1,8 +1,8 @@
 encryption = "age"
 
 [age]
-    identity = "/home/marton/.local/share/chezmoi/.age-chezmoi"
+    identity = "{{ .chezmoi.sourceDir }}/.age-chezmoi"
     recipient = "age1f69hqpjv0nj6j63w5kc80xdf32v8r68w5la3a6k9mk5eqvdkrsrqsuum0r"
 
-#[hooks.read-source-state.pre]
-#    command = "/home/marton/.local/share/chezmoi/.chezmoiscripts/run_before_00_decrypt_age_key.sh"
+[hooks.read-source-state.pre]
+    command = "{{ .chezmoi.sourceDir }}/.chezmoiscripts/run_before_00_decrypt_age_key.sh"

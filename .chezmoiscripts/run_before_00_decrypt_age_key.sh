@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-CHEZMOI_SOURCE_DIR=${CHEZMOI_SOURCE_DIR:-/home/marton/.local/share/chezmoi}
+CHEZMOI_SOURCE_DIR=${CHEZMOI_SOURCE_DIR:-$HOME/.local/share/chezmoi}
 
 AGE_KEY_FILE="${CHEZMOI_SOURCE_DIR}/.age-chezmoi.age"
 AGE_KEY_FILE_DECYPRTED="${CHEZMOI_SOURCE_DIR}/.age-chezmoi"
