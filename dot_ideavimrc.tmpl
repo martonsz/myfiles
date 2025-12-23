@@ -1,0 +1,164 @@
+{{ if eq .chezmoi.os "darwin" }}
+imap kj <Esc>
+set timeoutlen=500
+
+set clipboard+=unnamed
+
+Plug 'tpope/vim-surround'
+Plug 'preservim/nerdtree'
+
+" .ideavimrc for macOS IntelliJ IdeaVim
+
+"" -- Suggested options --
+"map Q gq
+
+" --- Enable IdeaVim plugins ---
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-commentary'
+
+let mapleader = " "
+
+set surround
+imap kj <Esc>
+set timeoutlen=500
+set incsearch
+set clipboard+=unnamed
+set scrolloff=8
+set highlightedyank
+set nerdtree
+
+" Maximize editor split
+nnoremap <C-w>= :action MaximizeEditorInSplit<CR>
+
+" Window splits
+map <leader>wv <Action>(SplitVertically)
+map <leader>ws <Action>(SplitHorizontally)
+map <leader>wu <Action>(Unsplit)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+map <leader>wx <Action>(MaximizeEditorInSplit)
+
+" Popup navigation
+inoremap <C-j> <Action>(PopupMenu-selectNext)
+inoremap <C-k> <Action>(PopupMenu-selectPrev)
+
+" File/project navigation
+nmap <leader>f <Action>(GotoFile)
+nmap <leader>e <Action>(ActivateProjectToolWindow)
+nmap <leader>ge <Action>(GotoNextError)
+nmap <leader>gE <Action>(GotoPreviousError)
+
+nmap <leader>i <Action>(ShowIntentionActions)
+
+" Implementation navigation
+nmap <leader>gpi <Action>(PeekImplementation)
+
+" Go to implementation (macOS: ⌘⌥B)
+nmap <leader>gi <Action>(GotoImplementation)
+
+" Quick fix (macOS: ⌥⏎)
+nmap <leader>gq <Action>(ShowIntentionActions)
+
+" Reference search (macOS: ⌥F7)
+nmap <leader>gr <Action>(FindUsages)
+
+" Go to type definition (macOS: ⇧⌘B)
+nmap <leader>gD <Action>(GotoTypeDeclaration)
+
+" Peek type definition popup
+nmap <leader>gpt <Action>(QuickTypeDefinition)
+
+" Show hover
+map <leader>gh <Action>(ShowHoverInfo)
+
+" Show context menu
+map <leader>m :action ShowContextMenu<CR>
+
+{{ else }}
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+
+"" -- Suggested options --
+
+" Don't use Ex mode, use Q for formatting.
+"map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+"Plug 'tpope/vim-commentary'
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+
+let mapleader = " "
+
+set surround
+
+imap kj <Esc>
+set timeoutlen=500
+
+set incsearch
+set clipboard+=unnamed
+set scrolloff=8
+set highlightedyank
+set nerdtree
+
+nnoremap <c-w>= :action MaximizeEditorInSplit<CR>
+
+" Window splits
+map <leader>wv <Action>(SplitVertically)
+map <leader>ws <Action>(SplitHorizontally)
+map <leader>wu <Action>(Unsplit)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+map <leader>wx <Action>(MaximizeEditorInSplit)
+
+" Popup navigation
+inoremap <C-j> <Action>(PopupMenu-selectNext)
+inoremap <C-k> <Action>(PopupMenu-selectPrev)
+
+nmap <leader>f <Action>(GotoFile)
+nmap <leader>e <Action>(ActivateProjectToolWindow)
+nmap <leader>ge <Action>(GotoNextError)
+nmap <leader>gE <Action>(GotoPreviousError)
+
+nmap <leader>i <Action>(ShowIntentionActions)
+
+" Peek implementation in popup (like Quick Definition but listing impls)
+nmap <leader>gpi <Action>(PeekImplementation)
+
+" Go to implementation (open file): Ctrl+Alt+B
+nmap <leader>gi <Action>(GotoImplementation)
+
+" Quick fix (intentions menu picker): Alt+Enter
+nmap <leader>gq <Action>(ShowIntentionActions)
+
+" Reference search (Find Usages): Alt+F7
+nmap <leader>gr <Action>(FindUsages)
+
+" Go to type definition: Ctrl+Shift+B
+nmap <leader>gD <Action>(GotoTypeDeclaration)
+
+" Peek type definition popup (if supported): there's "Quick Type Definition"
+nmap <leader>gpt <Action>(QuickTypeDefinition)
+
+" Show hover
+map <leader>gh <Action>(ShowHoverInfo)
+
+" Show context menu
+map <leader>m :action ShowContextMenu<CR>
+
+{{ end }}
