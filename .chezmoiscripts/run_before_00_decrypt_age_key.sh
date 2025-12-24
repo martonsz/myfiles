@@ -3,7 +3,7 @@ set -euo pipefail
 CHEZMOI_SOURCE_DIR=${CHEZMOI_SOURCE_DIR:-$HOME/.local/share/chezmoi}
 
 AGE_KEY_FILE="${CHEZMOI_SOURCE_DIR}/.age-chezmoi.age"
-AGE_KEY_FILE_DECYPRTED="${CHEZMOI_SOURCE_DIR}/.age-chezmoi"
+AGE_KEY_FILE_DECRYPTED="${CHEZMOI_SOURCE_DIR}/.age-chezmoi"
 
 while [[ ! -f "$AGE_KEY_FILE" ]]; do
     echo "Error: $AGE_KEY_FILE not found"
@@ -17,5 +17,6 @@ if [[ ! -f  "$AGE_KEY_FILE" ]]; then
   exit 1
 fi
 
-echo "Decrypting $AGE_KEY_FILE to $AGE_KEY_FILE_DECYPRTED"
-age -d "$AGE_KEY_FILE" > "$AGE_KEY_FILE_DECYPRTED"
+echo "Decrypting $AGE_KEY_FILE to $AGE_KEY_FILE_DECRYPTED"
+age -d "$AGE_KEY_FILE" > "$AGE_KEY_FILE_DECRYPTED"
+echo "Decrypted to $AGE_KEY_FILE_DECRYPTED"
