@@ -62,14 +62,9 @@ plug "agkozak/zsh-z"
 # shellcheck disable=SC1090
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if [[ -f "$HOME/.asdf/asdf.sh" ]]; then
-  # shellcheck disable=SC1091
-  source "$HOME/.asdf/asdf.sh"
-  # append completions to fpath
-  #fpath=(${ASDF_DIR}/completions $fpath)
-  # initialise completions with ZSH's compinit
-  #autoload -Uz compinit && compinit
-fi
+# asdf
+export ASDF_DATA_DIR="$HOME/.asdf"
+export PATH="$ASDF_DATA_DIR/shims:$PATH"
 
 # shellcheck disable=SC1091
 source "$HOME/.config/aliases.sh"

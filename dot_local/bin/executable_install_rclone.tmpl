@@ -1,11 +1,8 @@
 #!/bin/bash
 set -e
 
-if [ ! -d "$HOME/.asdf/installs/rclone" ]; then
-    # shellcheck disable=SC1091
-    source "$HOME/.asdf/asdf.sh"
+if [ ! -e "${ASDF_DATA_DIR:-$HOME/.asdf}/shims/rclone" ]; then
     asdf plugin add rclone
-    asdf list all rclone
     asdf install rclone latest
-    asdf global rclone latest
+    asdf set -u rclone latest
 fi

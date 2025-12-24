@@ -1,4 +1,7 @@
 fpath+="$HOME/.config/completion"
+if [ -d "${ASDF_DATA_DIR:-$HOME/.asdf}/completions" ]; then
+  fpath+="${ASDF_DATA_DIR:-$HOME/.asdf}/completions"
+fi
 autoload -Uz compinit
 
 # Initialize completions and suppress errors for missing completion files

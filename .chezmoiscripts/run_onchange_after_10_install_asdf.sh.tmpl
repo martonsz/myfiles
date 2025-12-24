@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
-echo "~ Running $(basename $0)"
+set -o pipefail
+echo "~ Running $(basename "$0")"
 
-if [ ! -d ~/.asdf ]; then
-    git clone https://github.com/asdf-vm/asdf.git "$HOME/.asdf" --branch v0.14.0
-fi
+bash "{{ .chezmoi.sourceDir }}/dot_local/bin/executable_install_asdf.sh"
