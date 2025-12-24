@@ -15,7 +15,7 @@ if [[ ! -f "${HOME}/.local/bin/asdf" ]] 2> /dev/null; then
     fi
     os=$(uname | tr '[:upper:]' '[:lower:]')
     curl -Ls https://github.com/asdf-vm/asdf/releases/download/${ASDF_LATEST_VERSION}/asdf-${ASDF_LATEST_VERSION}-${os}-${ASDF_ARCH}.tar.gz \
-        | tar xvf - -C /tmp
+        | tar xvzf - -C /tmp
     mkdir -p "${HOME}/.local/bin"
     mv -v "/tmp/asdf" "${HOME}/.local/bin/asdf"
 
