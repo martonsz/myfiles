@@ -86,3 +86,11 @@ if [[ -d "$HOME/.rd/bin" ]]; then
   # Add Rancher Desktop to the PATH if it exists
   export PATH="$HOME/.rd/bin:$PATH"
 fi
+
+# fnm
+FNM_PATH="$HOME/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$FNM_PATH:$PATH"
+  eval "`fnm env`"
+fi
+
