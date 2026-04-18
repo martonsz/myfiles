@@ -88,9 +88,19 @@ if [[ -d "$HOME/.rd/bin" ]]; then
 fi
 
 # fnm
-FNM_PATH="$HOME/.local/share/fnm"
+FNM_PATH="/opt/homebrew/opt/fnm/bin"
+if [ ! -d "$FNM_PATH" ]; then
+  FNM_PATH="$HOME/.local/share/fnm"
+fi
 if [ -d "$FNM_PATH" ]; then
   export PATH="$FNM_PATH:$PATH"
-  eval "`fnm env`"
+  eval "$(fnm env --shell zsh)"
 fi
 
+# bun
+# shellcheck disable=SC1091
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+if [ -d "$HOME/.bun" ]; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
