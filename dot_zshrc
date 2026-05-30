@@ -32,6 +32,10 @@ unsetopt beep
 # shellcheck disable=SC1091
 source "$HOME/.config/exports.sh"
 # shellcheck disable=SC1091
+if [ -f "$HOME/.config/exports.local.sh" ]; then
+  source "$HOME/.config/exports.local.sh"
+fi
+# shellcheck disable=SC1091
 source "$HOME/.config/myvars.sh"
 # shellcheck disable=SC1091
 source "$HOME/.config/zsh_completion.zsh"
