@@ -110,6 +110,5 @@ if [ -d "$HOME/.bun" ]; then
 fi
 
 if [ -f "$HOME/.local/bin/env" ]; then
-  #export PATH="$HOME/.local/bin:$PATH"
   . "$HOME/.local/bin/env"
 fi
