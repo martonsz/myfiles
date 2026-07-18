@@ -24,6 +24,7 @@ else
 fi
 if [ ! -d "${ASDF_DATA_DIR:-$HOME/.asdf}/completions" ]; then
      mkdir -p "${ASDF_DATA_DIR:-$HOME/.asdf}/completions"
+     export PATH="${HOME}/.local/bin:$PATH"
      asdf completion zsh > "${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
 else
     echo " Asdf completions already installed in: ${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
